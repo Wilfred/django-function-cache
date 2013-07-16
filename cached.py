@@ -1,8 +1,9 @@
-from django.core.cache import cache
 from functools import wraps
 from inspect import ismethod
-
+from datetime import timedelta
 import copy
+
+from django.core.cache import cache
 
 
 def make_hash(obj):
@@ -23,8 +24,7 @@ def make_hash(obj):
     return hash(tuple(frozenset(new_obj.items())))
 
 
-# fixme: allow to cache forever
-def cached(function, hours=1, minutes=0):
+def cached(function, days=0, hours=0, minutes=0):
     """Return a version of this function that caches its results for
     the time specified.
 
@@ -36,6 +36,10 @@ def cached(function, hours=1, minutes=0):
     1
 
     """
+    cache_time = timedelta(days=days, hours=hours, minutes=minutes).total_seconds()
+    if cache_time == 0:
+        cache_time = None
+    
     @wraps(function)
     def get_cache_or_call(*args, **kwargs):
         module_name = function.__module__
@@ -57,7 +61,7 @@ def cached(function, hours=1, minutes=0):
             # memcache returns None if the result isn't in the cache,
             # so we always store tuples
             result_to_cache = (result, None)
-            cache.set(cache_key, result_to_cache, 60 * 60 * hours + 60 * minutes)
+            cache.set(cache_key, result_to_cache, cache_time)
 
             return result
         else:
