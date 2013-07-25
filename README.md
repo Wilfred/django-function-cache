@@ -12,8 +12,16 @@ arguments.
 
 MIT license, see COPYING for details.
 
+## Installing
+
+    $ pip install django_function_cache
+
 ## Changelog
 
 ### v1.0
 
 Initial release.
+
+## Releasing a new version
+
+    $ python setup.py sdist upload
