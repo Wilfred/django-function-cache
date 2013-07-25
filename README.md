@@ -11,3 +11,9 @@ We cache based on the function name, its module name, and the
 arguments.
 
 MIT license, see COPYING for details.
+
+## Changelog
+
+### v1.0
+
+Initial release.
