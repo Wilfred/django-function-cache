@@ -24,7 +24,7 @@ def make_hash(obj):
     return hash(tuple(frozenset(new_obj.items())))
 
 
-def cached(function, days=0, hours=0, minutes=0):
+def cached(function, **kwargs):
     """Return a version of this function that caches its results for
     the time specified.
 
@@ -36,7 +36,7 @@ def cached(function, days=0, hours=0, minutes=0):
     1
 
     """
-    cache_time = timedelta(days=days, hours=hours, minutes=minutes).total_seconds()
+    cache_time = timedelta(**kwargs).total_seconds()
     if cache_time == 0:
         cache_time = None
     
