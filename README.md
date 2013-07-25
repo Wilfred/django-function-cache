@@ -1,5 +1,6 @@
 A simple wrapper for slow functions.
 
+    >>> from django_function_cache import cached
     >>> def foo(x): print "called"; return 1
     >>> cached(foo)('whatever')
     called
@@ -17,6 +18,16 @@ MIT license, see COPYING for details.
     $ pip install django_function_cache
 
 ## Changelog
+
+### v1.1
+
+Changed the top level package name. Previously you would write:
+
+    from cached import cached
+
+Now:
+
+    from django_function_cache import cached
 
 ### v1.0
 
