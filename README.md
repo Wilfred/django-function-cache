@@ -33,6 +33,16 @@ Now:
 
 Initial release.
 
-## Releasing a new version
+## Developing
+
+Check out the code, and install it in a virtual environment that
+includes Django:
+
+    $ source path/to/your/virtualenv
+    $ pip install -e .
+
+Hack away, then send a pull request when you're happy.
+
+### Releasing a new version
 
     $ python setup.py sdist upload
