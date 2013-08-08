@@ -1,31 +1,53 @@
-A simple wrapper for slow functions.
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
 
-    In [1]: from django_function_cache import cached
-
-    In [2]: def expensive_function(x): print "doing something slow!"; return 1
-
-    In [3]: cached(expensive_function)('foo')
-    doing something slow!
-    Out[3]: 1
-
-    In [4]: cached(expensive_function)('foo')
-    Out[4]: 1
-
-    In [5]: cached(expensive_function)('bar')
-    doing something slow!
-    Out[5]: 1
-
-    In [6]: cached(expensive_function)('bar')
-    Out[6]: 1
-
-We cache based on the function name, its module name, and the
-arguments.
-
-MIT license, see COPYING for details.
+- [Installing](#installing)
+- [Usage](#usage)
+- [Alternatives](#alternatives)
+- [Changelog](#changelog)
+	- [v1.1](#v11)
+	- [v1.0](#v10)
+- [Developing](#developing)
+	- [Releasing a new version](#releasing-a-new-version)
 
 ## Installing
 
     $ pip install django_function_cache
+
+## Usage
+
+Simply wrap `cached` around your expensive function:
+
+    from urllib2 import urlopen
+    import json
+
+    from django_function_cache import cached
+
+
+    def get_external_ip():
+        response = urlopen("http://httpbin.org/ip").read()
+        ip = json.loads(response)['origin']
+        return ip
+
+
+    def print_my_ip():
+        print cached(get_external_ip)()
+
+You can also specify a timeout:
+
+    def print_my_ip():
+        print cached(get_external_ip, minutes=5)()
+
+You can specify any time units
+[supported by timedelta](http://docs.python.org/2/library/datetime.html#datetime.timedelta).
+
+If the wrapped function raises an exception, nothing is cached and the
+exception propagates as if you'd call the function directly.
+
+## Alternatives
+
+If you're just caching database calls, you're probably better off
+using
+[Johnny Cache](http://pythonhosted.org/johnny-cache/index.html).
 
 ## Changelog
 
