@@ -16,6 +16,8 @@
 `django_function_cache` allows you to wrap functions so they cache
 their output if they are repeatedly called with the same arguments.
 
+[![Build Status](https://travis-ci.org/Wilfred/django-function-cache.png?branch=master)](https://travis-ci.org/Wilfred/django-function-cache)
+
 ## Requirements
 
 * Python 2.6+ (untested with Python 3)
