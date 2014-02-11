@@ -1,13 +1,25 @@
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+**Table of Contents** *generated with [autotoc](https://github.com/Wilfred/autotoc)*
 
-- [Installing](#installing)
-- [Usage](#usage)
-- [Alternatives](#alternatives)
-- [Changelog](#changelog)
-	- [v1.1](#v11)
-	- [v1.0](#v10)
-- [Developing](#developing)
-	- [Releasing a new version](#releasing-a-new-version)
+- [Django Function Cache](#django-function-cache)
+  - [Requirements](#requirements)
+  - [Installing](#installing)
+  - [Usage](#usage)
+  - [Alternatives](#alternatives)
+  - [Changelog](#changelog)
+    - [v1.1](#v11)
+    - [v1.0](#v10)
+  - [Developing](#developing)
+    - [Releasing a new version](#releasing-a-new-version)
+
+# Django Function Cache
+
+`django_function_cache` allows you to wrap functions so they cache
+their output if they are repeatedly called with the same arguments.
+
+## Requirements
+
+* Python 2.6+ (untested with Python 3)
+* Django 1.4+
 
 ## Installing
 
