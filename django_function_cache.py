@@ -1,3 +1,5 @@
+from __future__ import division
+
 from functools import wraps
 from inspect import ismethod
 from datetime import timedelta
@@ -24,6 +26,16 @@ def make_hash(obj):
     return hash(tuple(frozenset(new_obj.items())))
 
 
+def total_seconds(td):
+    """Given a timedelta object, return the total number of seconds it
+    represents.
+
+    We avoid using .total_seconds(), since that requires Python 2.7.
+
+    """
+    return (td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6
+
+
 def cached(function, **kwargs):
     """Return a version of this function that caches its results for
     the time specified.
@@ -36,7 +48,7 @@ def cached(function, **kwargs):
     1
 
     """
-    cache_time = timedelta(**kwargs).total_seconds()
+    cache_time = total_seconds(timedelta(**kwargs))
     if cache_time == 0:
         cache_time = None
     
