@@ -65,6 +65,11 @@ using
 
 ## Changelog
 
+### v1.2
+
+Added Python 2.6 support. Added Travis tests to ensure we work with
+the range of Python versions and Django versions that we claim we do.
+
 ### v1.1
 
 Changed the top level package name. Previously you would write:
